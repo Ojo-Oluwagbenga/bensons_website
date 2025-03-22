@@ -29,14 +29,21 @@ CREATE THE FOLDER FOR PROJECT project_name
 mkdir projects/project_name
 cd projects/project_name
 git init
-git pull -f origin main
-sudo nano project_name/proj/settings.py and include
+git remote add origin https://github.com/Ojo-Oluwagbenga/Oneklass_v2.git
+git pull origin the_branch --allow-unrelated-histories or git pull -f origin main
+cd project_name/project_name
+sudo nano settings.py and include
 import os
 __all settings data
-CSRF_TRUSTED_ORIGINS = ['secured site']
-ALLOWED_HOSTS = ['SITE']
+CSRF_TRUSTED_ORIGINS = ["projame.com"]
+ALLOWED_HOSTS = ["https://projame.com"]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 save and exit ctrl x y entr
+
+sudo nano asgi.py
+__all asgi data
+
+
 
 ACTIVATE THE ENVIRONMENT TO FINISH DB SETTINGS
 cd
@@ -77,8 +84,9 @@ Group=www-data
 WorkingDirectory=/home/rider/projects/project_name
 ExecStart=/home/rider/projects/oneklassenv/bin/gunicorn \
           --access-logfile - \
+          -k uvicorn.workers.UvicornWorker \
           --workers 3 \
-          --bind unix:/run/gunicorn.sock \
+          --bind unix:/run/project_name.sock \
           project_name.asgi:application
 
 [Install]
@@ -96,10 +104,10 @@ sudo systemctl restart project_name
 
 
 ===== CONNECT THE DOMAIN NAME ======
-sudo nano /etc/nginx/sites-available/server_domain_or_IP
+sudo nano /etc/nginx/sites-available/server_domain_or_IP #eg oneklass.com.ng
 server {
     listen 80;
-    server_name server_domain_or_IP;
+    server_name server_domain_or_IP; #EG oneklass.com.ng
 
     location = /favicon.ico { access_log off; log_not_found off; }
     location /static/ {
@@ -125,7 +133,7 @@ sudo certbot --nginx -d server_domain_or_IP
 
 ==== SET UP AUTO DEPLOY MECHANISM ====
 cd
-sudo nano serve_project.sh
+sudo nano serve_project_name.sh
 
 
 #!/bin/bash
@@ -153,7 +161,7 @@ echo "✅ Successfully Deployed and Restarted"
 save and exit
 
 MAKE IT Executable ON SIMPLE COMMAND
-chmod +x serve_project.sh
+sudo chmod +x serve_project.sh
 ./serve_project.sh
 
 DONE

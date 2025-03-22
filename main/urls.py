@@ -8,6 +8,6 @@ urlpatterns = [
     path("report/<str:report_code>", views.report, name="report"),
 
     path("logout", views.logout, name="signup"),
-    path("", views.dashboard, name="dashboard"),
+    path("", views.homepage, name="homepage"),
 
 ]

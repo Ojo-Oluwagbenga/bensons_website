@@ -31,6 +31,9 @@ def dashboard(response):
 
     return render(response, "dashboard.html", qset)
 
+def homepage(response):
+    return render(response, "homepage.html", {})
+
 def report(response, report_code):
     if not response.session.get("user_data"):
         response.session.flush()
